@@ -1,13 +1,6 @@
-/* .form {
-  background: aqua;
+.form {
+  margin-bottom: 2rem;
 }
-.small .form {
-  grid-row: 3 / 4;
-}
-.large .form {
-  grid-column: 1 / 2;
-  grid-row: 1 / 3;
-} */
 .inputWpr {
   display: grid;
   gap: 10px;

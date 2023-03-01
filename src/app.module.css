@@ -5,8 +5,9 @@
 }
 
 .small.app {
-  grid-template-rows: 1fr var(--actions-height) var(--form-height);
+  grid-template-rows: 1fr var(--actions-height) auto;
   width: calc(100vw - 15px);
+  /* min-height: 100vh; */
 }
 .large.app {
   grid-template-columns: var(--form-width) 1fr;
@@ -20,6 +21,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 2rem;
 }
 .large .form {
   grid-column: 1 / 2;
@@ -67,24 +69,3 @@
 .btn {
   margin: 0 0.5rem;
 }
-/* @media (min-width > 600px) {
-  .app {
-    grid-template-columns: 200px 1fr;
-    grid-template-rows: 1fr 60px;
-  }
-  .form {
-    background: aqua;
-    grid-column: 1 / 2;
-    grid-row: 1 / 3;
-  }
-  .actions {
-    background: maroon;
-    grid-column: 2 / 3;
-    grid-row: 2 / 3;
-  }
-  .canvas {
-    background: orange;
-    grid-column: 2 / 3;
-    grid-row: 1 / 2;
-  }
-} */

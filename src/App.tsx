@@ -4,8 +4,10 @@ import classes from './app.module.css';
 import { draw, clearCanvas } from './canvas';
 import Form from './Form';
 import { InputState } from './types';
+import useDeviceDetect from './hooks/useDeviceDetect';
 
 function App() {
+  const isTouchDevice = useDeviceDetect();
   const brushCanvasRef = React.useRef<HTMLCanvasElement>(null);
   const paintCanvasRef = React.useRef<HTMLCanvasElement>(null);
 
@@ -19,7 +21,7 @@ function App() {
   const formWidth = dimensions.width > breakpointWidth ? 350 : dimensions.width;
   const formHeight = 300;
   const actionsHeight = 60;
-  const mainHeadingHeight = 90;
+  const mainHeadingHeight = 83;
 
   const canvasWidth =
     dimensions.width > breakpointWidth
@@ -31,7 +33,7 @@ function App() {
       : dimensions.height - (formHeight + actionsHeight + mainHeadingHeight);
 
   const brushCanvasWidth =
-    dimensions.width > breakpointWidth ? (formWidth * 3) / 4 : formWidth / 2;
+    dimensions.width > breakpointWidth ? (formWidth * 3) / 4 : formWidth / 2.3;
 
   const [dataURL, setDataURL] = React.useState('');
 
@@ -51,13 +53,13 @@ function App() {
 
   const [inputs, setInputs] = React.useState<InputState>({
     shape: 'polygon',
-    size: 100,
+    size: 50,
     numEdges: 5,
     numSpikes: 5,
-    inset: 50,
-    fillColor: '#ff0000',
+    inset: 36,
+    fillColor: '#54CF8F',
     strokeColor: '#000000',
-    strokeWidth: 10,
+    strokeWidth: 4,
   });
 
   React.useEffect(() => {
@@ -98,9 +100,8 @@ function App() {
     const numEdgesOrSpikes =
       inputs.shape === 'polygon' ? inputs.numEdges / 2 : inputs.numSpikes;
     const inset = inputs.shape === 'polygon' ? 1 : 1 - inputs.inset / 100;
-    // const canvanRect = canvas.getBoundingClientRect();
 
-    function paint(e: MouseEvent) {
+    function mousePaint(e: MouseEvent) {
       draw(
         e.x - offsetX,
         e.y,
@@ -114,18 +115,50 @@ function App() {
         false
       );
     }
+    function touchPaint(e: TouchEvent) {
+      e.preventDefault();
+      console.log('touch: e: ', e);
+      let x = 0,
+        y = 0;
+      if (e.targetTouches.length == 1) {
+        var touch = e.targetTouches[0];
+        // Place element where the finger is
+        x = touch.pageX;
+        y = touch.pageY;
+      }
+      draw(
+        x - offsetX,
+        y,
+        canvas,
+        inputs.size,
+        inset,
+        numEdgesOrSpikes,
+        inputs.fillColor,
+        inputs.strokeColor,
+        inputs.strokeWidth,
+        false
+      );
+    }
+    console.log('add mousemove');
+    if (isTouchDevice) {
+      canvas.addEventListener('touchmove', touchPaint);
+    } else {
+      canvas.addEventListener('mousemove', mousePaint);
+    }
 
-    canvas.addEventListener('mousemove', paint);
-    // draw(250, 250, canvas, 100, 0.8, 7, inputs.fillColor);
     return () => {
-      canvas.removeEventListener('mousemove', paint);
+      console.log('remove mousemove');
+      if (isTouchDevice) {
+        canvas.removeEventListener('touchmove', touchPaint);
+      } else {
+        canvas.removeEventListener('mousemove', mousePaint);
+      }
     };
   }, [inputs]);
 
   React.useEffect(() => {
     function handleResize() {
       setDimensions({ width: window.innerWidth, height: window.innerHeight });
-      // canvasRef.current && draw(250, 250, canvasRef.current, 100, 0.8, 7);
     }
 
     window.addEventListener('resize', handleResize);

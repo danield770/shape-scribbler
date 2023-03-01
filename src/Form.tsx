@@ -13,7 +13,7 @@ function Form({
     e.preventDefault();
   }
   return (
-    <form onSubmit={handleSubmit}>
+    <form className={classes.form} onSubmit={handleSubmit}>
       <fieldset>
         <legend>Controls</legend>
 
@@ -79,7 +79,7 @@ function Form({
                   id='num-spikes'
                   name='numSpikes'
                   type='range'
-                  min='1'
+                  min='2'
                   max='30'
                   value={inputs.numSpikes}
                   onChange={(e) => updateInput(e.target.name, e.target.value)}
