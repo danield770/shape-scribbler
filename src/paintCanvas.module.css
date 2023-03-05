@@ -1,0 +1,18 @@
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  border-top: 5px solid;
+  background-color: goldenrod;
+}
+.small .actions {
+  grid-row: 2 / 3;
+}
+.large .actions {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+}
+
+.btn {
+  margin: 0 0.5rem;
+}

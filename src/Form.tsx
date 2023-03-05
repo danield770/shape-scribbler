@@ -139,6 +139,60 @@ function Form({
               onChange={(e) => updateInput(e.target.name, e.target.value)}
             />
           </div>
+          <div className={classes.row}>
+            <label htmlFor='shadow-offsetX' className='control-heading'>
+              Shadow Offset X: ({inputs.shadowOffsetX})
+            </label>
+            <input
+              id='shadow-offsetX'
+              name='shadowOffsetX'
+              type='range'
+              min='-30'
+              max='30'
+              value={inputs.shadowOffsetX}
+              onChange={(e) => updateInput(e.target.name, e.target.value)}
+            />
+          </div>
+          <div className={classes.row}>
+            <label htmlFor='shadow-offsetY' className='control-heading'>
+              Shadow Offset Y: ({inputs.shadowOffsetY})
+            </label>
+            <input
+              id='shadow-offsetY'
+              name='shadowOffsetY'
+              type='range'
+              min='-30'
+              max='30'
+              value={inputs.shadowOffsetY}
+              onChange={(e) => updateInput(e.target.name, e.target.value)}
+            />
+          </div>
+          <div className={classes.row}>
+            <label htmlFor='shadow-blur' className='control-heading'>
+              Shadow Blur: ({inputs.shadowBlur})
+            </label>
+            <input
+              id='shadow-blur'
+              name='shadowBlur'
+              type='range'
+              min='0'
+              max='20'
+              value={inputs.shadowBlur}
+              onChange={(e) => updateInput(e.target.name, e.target.value)}
+            />
+          </div>
+          <div className={classes.row}>
+            <label htmlFor='shadow-color' className='control-heading'>
+              Shadow Color: ({inputs.shadowColor})
+            </label>
+            <input
+              id='shadow-color'
+              name='shadowColor'
+              type='color'
+              value={inputs.shadowColor}
+              onChange={(e) => updateInput(e.target.name, e.target.value)}
+            />
+          </div>
         </div>
       </fieldset>
     </form>

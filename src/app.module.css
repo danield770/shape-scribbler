@@ -42,7 +42,7 @@
   position: relative;
   top: 20px;
 }
-.actions {
+/* .actions {
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -55,7 +55,7 @@
 .large .actions {
   grid-column: 2 / 3;
   grid-row: 2 / 3;
-}
+} */
 .canvasWpr {
   background: beige;
 }
@@ -66,6 +66,6 @@
   grid-column: 2 / 3;
   grid-row: 1 / 2;
 }
-.btn {
+/* .btn {
   margin: 0 0.5rem;
-}
+} */

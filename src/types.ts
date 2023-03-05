@@ -7,4 +7,8 @@ export interface InputState {
   fillColor: string;
   strokeColor: string;
   strokeWidth: number;
+  shadowOffsetX: number;
+  shadowOffsetY: number;
+  shadowBlur: number;
+  shadowColor: string;
 }
